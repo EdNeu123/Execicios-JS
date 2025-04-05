@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Lan House JS</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group label {
+      width: 210px;
+      margin-right: 10px;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Lan House JS</h1>
+
+  <div class="form-group">
+    <label for="valor">Valor por 15min de Uso R$:</label>
+    <input type="number" id="valor" placeholder="Ex: 3.00" step="0.01">
+  </div>
+
+  <div class="form-group">
+    <label for="tempo">Tempo de Uso do Cliente (min):</label>
+    <input type="number" id="tempo" placeholder="Ex: 34">
+  </div>
+
+  <button onclick="calcularValor()">Calcular Valor a Pagar</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function calcularValor() {
+      const valor = parseFloat(document.getElementById("valor").value);
+      const tempo = parseInt(document.getElementById("tempo").value);
+
+      if (isNaN(valor) || valor <= 0 || isNaN(tempo) || tempo <= 0) {
+        alert("Preencha corretamente os campos!");
+        return;
+      }
+
+      const blocos = Math.ceil(tempo / 15); // Arredonda pra cima
+      const total = blocos * valor;
+
+      const resultado = document.getElementById("resultado");
+      resultado.innerHTML = `Valor a Pagar R$: ${total.toFixed(2).replace('.', ',')}`;
+    }
+  </script>
+
+</body>
+</html>

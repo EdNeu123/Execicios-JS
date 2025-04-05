@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Farmácia JS</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group label {
+      width: 160px;
+      margin-right: 10px;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Farmácia JS</h1>
+
+  <div class="form-group">
+    <label for="medicamento">Medicamento:</label>
+    <input type="text" id="medicamento" placeholder="Ex: Dipirona">
+  </div>
+
+  <div class="form-group">
+    <label for="preco">Preço R$:</label>
+    <input type="number" id="preco" placeholder="Ex: 19.90" step="0.01">
+  </div>
+
+  <button onclick="mostrarPromocao()">Mostrar Promoção</button>
+
+  <div id="resultado"></div>
+
+  <script>
+    function mostrarPromocao() {
+      const nome = document.getElementById("medicamento").value.trim();
+      const preco = parseFloat(document.getElementById("preco").value);
+
+      if (!nome || isNaN(preco) || preco <= 0) {
+        alert("Preencha corretamente os campos!");
+        return;
+      }
+
+      const total = preco * 2;
+      const totalComDesconto = Math.floor(total); // remove os centavos
+
+      const resultadoDiv = document.getElementById("resultado");
+      resultadoDiv.innerHTML = `
+        Promoção de ${nome} <br>
+        Leve 2 por apenas R$ ${totalComDesconto.toFixed(2).replace('.', ',')}
+      `;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Locadora de Vídeos</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group label {
+      width: 160px;
+      margin-right: 10px;
+    }
+
+    #resultados {
+      margin-top: 20px;
+    }
+
+    .resultado-item {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Video Locadora JS</h1>
+
+  <div class="form-group">
+    <label for="titulo">Título do Filme:</label>
+    <input type="text" id="titulo" placeholder="Ex: Matrix">
+  </div>
+
+  <div class="form-group">
+    <label for="duracao">Duração (em minutos):</label>
+    <input type="number" id="duracao" placeholder="Ex: 130">
+  </div>
+
+  <button onclick="converterDuracao()">Converter em Horas e Minutos</button>
+
+  <div id="resultados"></div>
+
+  <script>
+    function converterDuracao() {
+      const titulo = document.getElementById("titulo").value.trim();
+      const duracaoMin = parseInt(document.getElementById("duracao").value);
+
+      if (!titulo || isNaN(duracaoMin) || duracaoMin <= 0) {
+        alert("Preencha corretamente os campos!");
+        return;
+      }
+
+      const horas = Math.floor(duracaoMin / 60);
+      const minutos = duracaoMin % 60;
+
+      const novoParagrafo = document.createElement("p");
+      novoParagrafo.classList.add("resultado-item");
+      novoParagrafo.innerHTML = `
+        O ${titulo} <br>
+        ${horas} Hora(s) e ${minutos} Minuto(s)`;
+
+      document.getElementById("resultados").appendChild(novoParagrafo);
+
+      // Limpa os campos
+      document.getElementById("titulo").value = "";
+      document.getElementById("duracao").value = "";
+    }
+  </script>
+
+</body>
+</html>
